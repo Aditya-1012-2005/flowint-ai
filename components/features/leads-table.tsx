@@ -56,7 +56,7 @@ export function LeadsTable({ leads }: { leads: LeadListItem[] }) {
         <li
           key={lead.id}
           className={cn(
-            'border-border bg-card rounded-lg border p-5 shadow-sm transition-opacity',
+            'border-border bg-card rounded-3xl border p-6 transition-opacity',
             isPending && busyId === lead.id && 'opacity-60',
           )}
         >

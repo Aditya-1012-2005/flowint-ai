@@ -62,8 +62,13 @@ export function LoginForm() {
         {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
       </div>
 
-      <Button type="submit" size="lg" disabled={isSubmitting}>
-        {isSubmitting ? 'Signing in…' : 'Sign in'}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={isSubmitting}
+        className="h-12 rounded-full text-base font-semibold"
+      >
+        {isSubmitting ? 'Signing in...' : 'Sign in'}
       </Button>
     </form>
   );

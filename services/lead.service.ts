@@ -10,7 +10,7 @@ export function createLead(data: CreateLeadData): Promise<Lead> {
   return prisma.lead.create({ data });
 }
 
-/** All leads, newest first — for the admin dashboard. */
+/** All leads, newest first, for the admin dashboard. */
 export function listLeads(): Promise<Lead[]> {
   return prisma.lead.findMany({ orderBy: { createdAt: 'desc' } });
 }

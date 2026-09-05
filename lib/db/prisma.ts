@@ -11,7 +11,7 @@ if (!neonConfig.webSocketConstructor) {
 }
 
 // A single connection string drives both the adapter (runtime queries, pooled)
-// and — separately — the Prisma CLI for migrations via prisma7.config.ts.
+// and, separately, the Prisma CLI for migrations via prisma7.config.ts.
 // The Neon pool connects lazily, so constructing this at import time does not
 // open a connection (safe during `next build`).
 const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });

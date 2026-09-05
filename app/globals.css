@@ -9,7 +9,8 @@
   --color-background-subtle: var(--background-subtle);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-heading: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -41,35 +42,36 @@
 }
 
 /*
-  Flowint AI design system (docs/UI_UX_PLAN.md).
-  Light mode only for v1 — no .dark overrides on purpose.
+  Flowint AI design system, v2 "Gen Z but grounded".
+  Warm cream base, ink text, fresh green brand, punchy coral CTA.
+  Light mode only for v1 (no .dark overrides on purpose).
 */
 :root {
-  --background: #ffffff;
-  --background-subtle: #f9fafb;
-  --foreground: #111827;
+  --background: #fbf9f3; /* warm cream */
+  --background-subtle: #f1ecdf; /* deeper cream for alternating sections */
+  --foreground: #1c1a15; /* warm ink */
   --card: #ffffff;
-  --card-foreground: #111827;
+  --card-foreground: #1c1a15;
   --popover: #ffffff;
-  --popover-foreground: #111827;
-  --primary: #4338ca;
-  --primary-hover: #3730a3;
+  --popover-foreground: #1c1a15;
+  --primary: #1f7a4d; /* grounded fresh green */
+  --primary-hover: #196340;
   --primary-foreground: #ffffff;
-  --secondary: #f9fafb;
-  --secondary-foreground: #111827;
-  --muted: #f9fafb;
-  --muted-foreground: #4b5563;
-  --accent: #f3f4f6;
-  --accent-foreground: #111827;
-  --cta: #d97706;
-  --cta-hover: #b45309;
+  --secondary: #f1ecdf;
+  --secondary-foreground: #1c1a15;
+  --muted: #f1ecdf;
+  --muted-foreground: #6d6555; /* warm gray */
+  --accent: #eae3d2;
+  --accent-foreground: #1c1a15;
+  --cta: #ff5c39; /* punchy coral */
+  --cta-hover: #e84a29;
   --cta-foreground: #ffffff;
-  --destructive: #dc2626;
-  --success: #059669;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #4338ca;
-  --radius: 0.5rem;
+  --destructive: #d1402c;
+  --success: #1f7a4d;
+  --border: #e4dccb; /* warm border */
+  --input: #ddd3bf;
+  --ring: #1f7a4d;
+  --radius: 0.9rem;
 }
 
 @layer base {
@@ -81,5 +83,55 @@
   }
   html {
     @apply font-sans;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Marker-pen highlight behind a word (hand-made feel, not a template badge). */
+  .marker {
+    background-image: linear-gradient(120deg, var(--cta) 0%, var(--cta) 100%);
+    background-repeat: no-repeat;
+    background-position: 0 78%;
+    background-size: 100% 42%;
+    padding-inline: 0.08em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .marker-green {
+    background-image: linear-gradient(120deg, var(--primary) 0%, var(--primary) 100%);
+    background-position: 0 82%;
+    background-size: 100% 34%;
+    color: var(--primary-foreground);
+    padding-inline: 0.12em;
+    border-radius: 0.1em;
+  }
+
+  /* Tactile offset shadow: reads as a deliberate design choice, not a soft AI blur. */
+  .shadow-pop {
+    box-shadow: 5px 5px 0 0 var(--foreground);
+  }
+}
+
+/* Scrolling marquee strip. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
   }
 }

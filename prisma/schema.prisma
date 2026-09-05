@@ -7,7 +7,7 @@ generator client {
 }
 
 // Prisma 7: connection URLs live in prisma7.config.ts (for the CLI/migrations)
-// and are supplied to PrismaClient at runtime via a driver adapter — see
+// and are supplied to PrismaClient at runtime via a driver adapter. See
 // lib/db/prisma.ts.
 datasource db {
   provider = "postgresql"

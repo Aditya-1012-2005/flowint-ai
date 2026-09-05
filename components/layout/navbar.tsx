@@ -13,20 +13,26 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-border bg-background/95 supports-backdrop-filter:bg-background/80 sticky top-0 z-50 border-b backdrop-blur">
+    <header className="border-border bg-background/85 supports-backdrop-filter:bg-background/70 sticky top-0 z-50 border-b backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-8">
-        <Link href="/" className="text-foreground text-lg font-bold" onClick={() => setOpen(false)}>
-          {siteConfig.name}
+        <Link
+          href="/"
+          className="text-foreground font-display text-xl font-extrabold tracking-tight"
+          onClick={() => setOpen(false)}
+        >
+          Flowint<span className="text-primary">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'hover:text-foreground text-sm font-medium transition-colors',
-                pathname === item.href ? 'text-foreground' : 'text-muted-foreground',
+                'rounded-full px-3.5 py-2 text-sm font-medium transition-colors',
+                pathname === item.href
+                  ? 'bg-accent text-foreground'
+                  : 'text-muted-foreground hover:text-foreground',
               )}
             >
               {item.label}
@@ -38,9 +44,9 @@ export function Navbar() {
           <Button
             render={<Link href="/contact" />}
             nativeButton={false}
-            className="bg-cta text-cta-foreground hover:bg-cta-hover"
+            className="bg-cta text-cta-foreground hover:bg-cta-hover rounded-full px-5 font-semibold"
           >
-            Book a Demo
+            Book a demo
           </Button>
         </div>
 
@@ -48,7 +54,7 @@ export function Navbar() {
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
-          className="text-foreground inline-flex size-9 items-center justify-center rounded-lg md:hidden"
+          className="text-foreground border-border inline-flex size-10 items-center justify-center rounded-full border md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -64,10 +70,10 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    'block rounded-lg px-3 py-2 text-sm font-medium',
+                    'block rounded-xl px-3 py-2.5 text-sm font-medium',
                     pathname === item.href
-                      ? 'bg-muted text-foreground'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                      ? 'bg-accent text-foreground'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                   )}
                 >
                   {item.label}
@@ -78,10 +84,10 @@ export function Navbar() {
           <Button
             render={<Link href="/contact" />}
             nativeButton={false}
-            className="bg-cta text-cta-foreground hover:bg-cta-hover mt-3 w-full"
+            className="bg-cta text-cta-foreground hover:bg-cta-hover mt-3 w-full rounded-full font-semibold"
             onClick={() => setOpen(false)}
           >
-            Book a Demo
+            Book a demo
           </Button>
         </nav>
       )}

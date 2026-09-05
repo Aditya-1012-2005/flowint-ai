@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Always render fresh — leads change and statuses are updated in place.
+// Always render fresh, since leads change and statuses are updated in place.
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
@@ -52,8 +52,8 @@ export default async function DashboardPage() {
 
         <div className="mt-8">
           {loadError ? (
-            <div className="border-destructive/30 bg-destructive/5 rounded-lg border p-8 text-center">
-              <p className="text-destructive font-medium">Couldn&apos;t load leads.</p>
+            <div className="border-destructive/30 bg-destructive/5 rounded-3xl border p-8 text-center">
+              <p className="text-destructive font-semibold">Couldn&apos;t load leads.</p>
               <p className="text-muted-foreground mt-1 text-sm">
                 The database may be unavailable. Check the connection and try again.
               </p>
@@ -61,8 +61,8 @@ export default async function DashboardPage() {
           ) : leads && leads.length > 0 ? (
             <LeadsTable leads={leads} />
           ) : (
-            <div className="border-border bg-background-subtle rounded-lg border p-12 text-center">
-              <p className="text-foreground font-medium">No leads yet</p>
+            <div className="border-border bg-card rounded-3xl border p-12 text-center">
+              <p className="text-foreground font-bold">No leads yet</p>
               <p className="text-muted-foreground mt-1 text-sm">
                 Submissions from the contact form will show up here.
               </p>

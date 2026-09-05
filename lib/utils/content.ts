@@ -14,7 +14,7 @@ export const solutions: Solution[] = [
     title: 'Inventory & stock tracking',
     summary: "Know what's in stock without counting registers or updating a spreadsheet by hand.",
     details: [
-      'Stock levels that update automatically as you buy and sell',
+      'Stock levels that update on their own as you buy and sell',
       'Low-stock alerts before you run out of a fast-moving item',
       'One clear view instead of five different Excel files',
     ],
@@ -22,9 +22,9 @@ export const solutions: Solution[] = [
   {
     icon: ReceiptText,
     title: 'Billing & invoicing',
-    summary: 'Generate clean, correct invoices in seconds and keep track of who still owes you.',
+    summary: 'Make clean, correct invoices in seconds and keep track of who still owes you.',
     details: [
-      'GST-ready invoices without manual formatting',
+      'GST-ready invoices without the manual formatting',
       'Payment tracking so nothing slips through the cracks',
       'Automatic reminders for pending payments',
     ],
@@ -33,7 +33,7 @@ export const solutions: Solution[] = [
     icon: FileSpreadsheet,
     title: 'Data entry automation',
     summary:
-      'Stop retyping the same numbers. Let the details from bills and orders flow in on their own.',
+      'Stop retyping the same numbers. Details from bills and orders flow in on their own.',
     details: [
       'Pull details from bills, orders and messages automatically',
       'Fewer typos and mismatched entries',
@@ -44,7 +44,7 @@ export const solutions: Solution[] = [
     icon: BarChart3,
     title: 'Reports & insights',
     summary:
-      'See how the business is really doing — daily, weekly, monthly — without building charts.',
+      'See how the business is really doing, day by day and month by month, without building charts.',
     details: [
       'Ready-made sales and expense summaries',
       'Spot your best products and slow days at a glance',
@@ -56,20 +56,20 @@ export const solutions: Solution[] = [
 export const howItWorks = [
   {
     step: '1',
-    title: 'We understand how you work today',
+    title: 'We learn how you work today',
     description:
-      'We sit with you and look at your current process — the Excel sheets, the registers, the WhatsApp orders — exactly as it is.',
+      'We sit with you and look at your real setup: the Excel sheets, the registers, the WhatsApp orders, exactly as they are.',
   },
   {
     step: '2',
-    title: 'We set up automation around it',
+    title: 'We build automation around it',
     description:
-      "We build simple tools that fit your existing way of working, so there's nothing complicated to learn.",
+      "We set up simple tools that fit the way you already work, so there's nothing new to learn.",
   },
   {
     step: '3',
-    title: 'You save time, every day',
+    title: 'You get your time back',
     description:
-      'Routine work runs on its own. You spend less time on data entry and more time running your business.',
+      'The routine stuff runs on its own. You spend less time on data entry and more time on the business.',
   },
 ];

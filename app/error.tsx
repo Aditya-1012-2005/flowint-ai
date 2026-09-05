@@ -20,7 +20,7 @@ export default function Error({
       <p className="text-muted-foreground mt-2">
         An unexpected error occurred. You can try again, or come back later.
       </p>
-      <Button onClick={() => reset()} className="mt-6">
+      <Button onClick={() => reset()} className="mt-6 rounded-full px-6 font-semibold">
         Try again
       </Button>
     </div>
