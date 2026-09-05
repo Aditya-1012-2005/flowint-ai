@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+  Flowint AI design system (docs/UI_UX_PLAN.md).
+  Light mode only for v1 — no .dark overrides on purpose.
+*/
+:root {
+  --background: #ffffff;
+  --background-subtle: #f9fafb;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary: #4338ca;
+  --primary-hover: #3730a3;
+  --primary-foreground: #ffffff;
+  --secondary: #f9fafb;
+  --secondary-foreground: #111827;
+  --muted: #f9fafb;
+  --muted-foreground: #4b5563;
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+  --cta: #d97706;
+  --cta-hover: #b45309;
+  --cta-foreground: #ffffff;
+  --destructive: #dc2626;
+  --success: #059669;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #4338ca;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}

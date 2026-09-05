@@ -1,0 +1,47 @@
+// Flowint AI database schema.
+// Design reference: docs/DATABASE.md
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+// Prisma 7: connection URLs live in prisma7.config.ts (for the CLI/migrations)
+// and are supplied to PrismaClient at runtime via a driver adapter — see
+// lib/db/prisma.ts.
+datasource db {
+  provider = "postgresql"
+}
+
+/// A submission from the public contact / book-a-demo form.
+model Lead {
+  id           String     @id @default(cuid())
+  name         String     @db.VarChar(100)
+  businessName String     @db.VarChar(150)
+  phone        String     @db.VarChar(20)
+  email        String     @db.VarChar(254)
+  message      String     @db.VarChar(2000)
+  status       LeadStatus @default(NEW)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// A Flowint AI team member who can log in and manage leads.
+/// Seeded manually — there is no public sign-up.
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique @db.VarChar(254)
+  passwordHash String
+  name         String?  @db.VarChar(100)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
