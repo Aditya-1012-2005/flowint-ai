@@ -31,7 +31,11 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [...siteConfig.keywords],
   applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   category: 'technology',
+  alternates: { canonical: '/' },
   openGraph: {
     title: defaultTitle,
     description: siteConfig.description,
@@ -51,6 +55,11 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   formatDetection: { telephone: true, email: true },
+  // Paste your Google Search Console token into NEXT_PUBLIC_GOOGLE_VERIFICATION
+  // (or hard-code it here) to verify the site for indexing.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

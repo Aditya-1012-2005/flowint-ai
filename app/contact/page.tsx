@@ -33,8 +33,9 @@ const points = [
 
 export default function ContactPage() {
   return (
-    <section data-guide-section="Fill this in and we'll be in touch — I'll wait right here.">
-      <Container className="py-16 sm:py-20">
+    <section data-guide-section="📬 Book a Demo — fill this in and we'll be in touch. I'll wait right here!">
+
+      <Container className="py-12 sm:py-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <h1 className="text-foreground text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">

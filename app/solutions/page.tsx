@@ -21,10 +21,10 @@ export default function SolutionsPage() {
   return (
     <>
       <section
-        data-guide-section="Every service we offer, in one place. Hover a card for details."
+        data-guide-section="🛠️ Solutions — everything we can automate, laid out for you."
         className="border-border/60 border-b bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-20">
+        <Container className="py-12 sm:py-16">
           <Reveal stagger className="max-w-2xl">
             <Eyebrow>Solutions</Eyebrow>
             <h1 className="text-foreground mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
@@ -39,8 +39,8 @@ export default function SolutionsPage() {
         </Container>
       </section>
 
-      <section>
-        <Container className="py-16 sm:py-24">
+      <section data-guide-section="🔍 The Full Menu — hover any card to see exactly what it does.">
+        <Container className="py-12 sm:py-16">
           <Reveal stagger className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {solutions.map((solution) => (
               <SolutionCard key={solution.title} solution={solution} showDetails />
@@ -50,10 +50,10 @@ export default function SolutionsPage() {
       </section>
 
       <section
-        data-guide-section="Not sure where to begin? Book a demo and we'll find your quickest win."
+        data-guide-section="🤔 Not Sure Where to Start? Book a demo and we'll find your quickest win."
         className="border-border/60 border-t bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-20">
+        <Container className="py-12 sm:py-16">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
               Not sure where to start?

@@ -74,8 +74,8 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqJsonLd)} />
 
       {/* Hero */}
-      <section data-guide-section="Welcome! This is what we do — help small businesses run on autopilot.">
-        <Container className="py-12 sm:py-24">
+      <section data-guide-section="🏠 Home base — this is us: we put small businesses on autopilot instead of Excel.">
+        <Container className="py-10 sm:py-16">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
             <Reveal stagger>
               <Eyebrow>AI automation for small &amp; local businesses</Eyebrow>
@@ -94,7 +94,7 @@ export default function Home() {
                     render={<Link href="/contact" />}
                     nativeButton={false}
                     size="lg"
-                    data-guide="Click here to book a free demo — no card, no pressure."
+                    data-guide="Click me to book a free demo — no card, no pressure! 🤖"
                     className={ctaClass}
                   >
                     Book a free demo
@@ -106,7 +106,7 @@ export default function Home() {
                   nativeButton={false}
                   size="lg"
                   variant="outline"
-                  data-guide="See the full list of work we can automate for you."
+                  data-guide="This opens the full menu of what we automate →"
                   className="border-foreground/15 bg-card/70 h-12 w-full rounded-full px-7 text-base font-semibold backdrop-blur hover:border-primary/40 sm:w-auto"
                 >
                   See what we automate
@@ -166,8 +166,9 @@ export default function Home() {
       </section>
 
       {/* The problem */}
-      <section data-guide-section="Sound familiar? These are the daily headaches we take away.">
-        <Container className="py-16 sm:py-24">
+      <section data-guide-section="😮‍💨 The Problem — the daily headaches I'm here to help you ditch.">
+
+        <Container className="py-12 sm:py-16">
           <Reveal className="max-w-2xl">
             <Eyebrow>The hard way</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
@@ -202,10 +203,10 @@ export default function Home() {
 
       {/* Solutions preview */}
       <section
-        data-guide-section="Here's the work we automate. Hover a card to see the details."
+        data-guide-section="🛠️ What We Automate — hover any card and I'll spill the details."
         className="border-border/60 border-y bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-24">
+        <Container className="py-12 sm:py-16">
           <Reveal className="max-w-2xl">
             <Eyebrow>What we automate</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
@@ -232,8 +233,9 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section data-guide-section="We build for businesses like yours, whatever the trade.">
-        <Container className="py-16 sm:py-24">
+      <section data-guide-section="🏪 Who We Serve — find your trade in here?">
+
+        <Container className="py-12 sm:py-16">
           <Reveal className="max-w-2xl">
             <Eyebrow>Who we work with</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
@@ -259,10 +261,10 @@ export default function Home() {
 
       {/* How it works */}
       <section
-        data-guide-section="Getting started is easy — three simple steps, nothing to relearn."
+        data-guide-section="🚀 How It Works — three steps, zero homework. Promise."
         className="border-border/60 border-y bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-24">
+        <Container className="py-12 sm:py-16">
           <Reveal className="max-w-2xl">
             <Eyebrow>How it works</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
@@ -286,8 +288,9 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section data-guide-section="Questions? I've got answers right here.">
-        <Container className="py-16 sm:py-24">
+      <section data-guide-section="❓ FAQ — tap a question, I've got the answer.">
+
+        <Container className="py-12 sm:py-16">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <Reveal>
               <Eyebrow>FAQ</Eyebrow>
@@ -316,8 +319,9 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section data-guide-section="Ready when you are — book a free demo and let's talk.">
-        <Container className="pb-20 sm:pb-28">
+      <section data-guide-section="🎯 Let's Go — book a free demo and we'll talk, no pressure.">
+
+        <Container className="pb-16 sm:pb-20">
           <Reveal className="relative overflow-hidden rounded-[2rem] px-6 py-14 sm:px-14 sm:py-20">
             <div
               className="absolute inset-0 -z-10"
@@ -344,7 +348,7 @@ export default function Home() {
                     render={<Link href="/contact" />}
                     nativeButton={false}
                     size="lg"
-                    data-guide="This is the one — book your free demo here!"
+                    data-guide="This is the one — your free demo starts here! 🎉"
                     className="h-12 w-full rounded-full bg-white px-7 text-base font-semibold text-primary shadow-glow hover:bg-white/90 sm:w-auto"
                   >
                     Book your free demo

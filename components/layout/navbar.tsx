@@ -55,7 +55,7 @@ export function Navbar() {
             <Button
               render={<Link href="/contact" />}
               nativeButton={false}
-              data-guide="Book a free demo any time from up here."
+              data-guide="Need a demo? I'm one tap away up here. ⚡"
               className="bg-cta text-cta-foreground hover:bg-cta-hover shadow-glow rounded-full px-5 font-semibold"
             >
               Book a demo

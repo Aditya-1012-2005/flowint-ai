@@ -37,10 +37,10 @@ export default function AboutPage() {
   return (
     <>
       <section
-        data-guide-section="A bit about us — and why we only build for small businesses."
+        data-guide-section="👋 About Us — who we are and why we only build for small businesses."
         className="border-border/60 border-b bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-20">
+        <Container className="py-12 sm:py-16">
           <Reveal stagger className="max-w-2xl">
             <Eyebrow>About us</Eyebrow>
             <h1 className="text-foreground mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
@@ -56,7 +56,7 @@ export default function AboutPage() {
       </section>
 
       <section>
-        <Container className="py-16 sm:py-24">
+        <Container className="py-12 sm:py-16">
           <Reveal className="text-foreground/80 mx-auto max-w-3xl space-y-6 text-lg leading-relaxed">
             <p>
               Across markets and neighbourhoods, countless businesses still run on spreadsheets,
@@ -79,10 +79,10 @@ export default function AboutPage() {
       </section>
 
       <section
-        data-guide-section="What we believe — the principles behind every build."
+        data-guide-section="💡 What We Believe — the principles behind every build."
         className="border-border/60 border-t bg-background-subtle/60"
       >
-        <Container className="py-16 sm:py-24">
+        <Container className="py-12 sm:py-16">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
               What we believe
@@ -104,8 +104,9 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section data-guide-section="Let's see what we can do for your business.">
-        <Container className="py-16 sm:py-20">
+      <section data-guide-section="🤝 Let's Talk — see what we can do for your business.">
+
+        <Container className="py-12 sm:py-16">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
               Let us see what we can do for your business

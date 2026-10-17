@@ -11,23 +11,36 @@ import {
 } from 'motion/react';
 
 /**
- * "Flo" — a vibrant robot companion that follows the cursor with spring lag,
- * leaves a colourful trail, looks toward where you're heading, and shows
- * contextual guidance. Guidance comes from `data-guide` (on hover) and
- * `data-guide-section` (on scroll into view) attributes placed around the site.
+ * "Flo" — a vibrant robot tour guide.
  *
- * It is purely decorative: pointer-events are disabled so it never blocks
- * clicks, and it disables itself on touch devices and for reduced-motion users.
+ * - Desktop (fine pointer): follows the cursor with spring lag, leaves a
+ *   colourful trail, and its eyes track where you're heading.
+ * - Mobile / touch: sits as a floating mascot in the corner; tap it to
+ *   toggle its speech bubble.
+ *
+ * In every mode it narrates the page: the bubble names the current section
+ * (from `data-guide-section`) as you scroll, shows hover hints (`data-guide`)
+ * on desktop, and rotates friendly nudges when you go quiet. It never blocks
+ * clicks and disables itself for reduced-motion users.
  */
 
-const INTRO = "Hi, I'm Flo 🤖 — tap around, I'll point out the good stuff.";
-const IDLE = 'Still here! Book a free demo and I’ll show you what we automate →';
-const TRAIL = [
-  { size: 10, color: 'var(--brand-cyan)', stiffness: 220, damping: 20 },
-  { size: 8, color: 'var(--brand-violet)', stiffness: 170, damping: 22 },
-  { size: 6, color: 'var(--brand-pink)', stiffness: 130, damping: 24 },
-  { size: 4, color: 'var(--brand-amber)', stiffness: 100, damping: 26 },
+const INTRO = "Heyy, it's me Flo 🤖 — your personal tour guide for this site. Follow me!";
+
+const IDLES = [
+  'Psst — still here if you need a hand. 👋',
+  'Fun fact: most shops we help save ~9 hours a week. 🤯',
+  'Lost? Book a free demo and we’ll map it out together. 🗺️',
+  'Scroll on — I’ll tell you what each part does. 👇',
 ];
+
+const TRAIL = [
+  { size: 12, color: 'var(--brand-cyan)', stiffness: 220, damping: 20 },
+  { size: 9, color: 'var(--brand-violet)', stiffness: 170, damping: 22 },
+  { size: 7, color: 'var(--brand-pink)', stiffness: 130, damping: 24 },
+  { size: 5, color: 'var(--brand-amber)', stiffness: 100, damping: 26 },
+];
+
+type Mode = 'off' | 'cursor' | 'fixed';
 
 function TrailDot({
   x,
@@ -65,41 +78,41 @@ function TrailDot({
 }
 
 export function RobotGuide() {
-  const [enabled, setEnabled] = useState(false);
+  const [mode, setMode] = useState<Mode>('off');
   const [message, setMessage] = useState(INTRO);
   const [showBubble, setShowBubble] = useState(true);
   const [waving, setWaving] = useState(true);
 
-  // Raw cursor position and its spring-smoothed follower.
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
   const botX = useSpring(mouseX, { stiffness: 120, damping: 18, mass: 0.6 });
   const botY = useSpring(mouseY, { stiffness: 120, damping: 18, mass: 0.6 });
 
-  // Pupils look toward the direction of travel (raw cursor vs. settled bot).
   const dx = useTransform([mouseX, botX], ([m, b]: number[]) =>
-    Math.max(-2.5, Math.min(2.5, (m - b) * 0.12)),
+    Math.max(-3.5, Math.min(3.5, (m - b) * 0.14)),
   );
   const dy = useTransform([mouseY, botY], ([m, b]: number[]) =>
-    Math.max(-2.5, Math.min(2.5, (m - b) * 0.12)),
+    Math.max(-3.5, Math.min(3.5, (m - b) * 0.14)),
   );
+  const still = useMotionValue(0);
 
   const sectionMsg = useRef(INTRO);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleIndex = useRef(0);
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const fine = window.matchMedia('(pointer: fine)').matches;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!fine || reduced) return;
-    // Capability detection can only run after mount (matchMedia is client-only),
-    // so enabling here is intentional.
+    const resolved: Mode = fine ? 'cursor' : 'fixed';
+    // Capability detection can only run after mount (matchMedia is client-only).
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setEnabled(true);
+    setMode(resolved);
 
     const resetIdle = () => {
       if (idleTimer.current) clearTimeout(idleTimer.current);
       idleTimer.current = setTimeout(() => {
-        setMessage(IDLE);
+        setMessage(IDLES[idleIndex.current % IDLES.length]);
+        idleIndex.current += 1;
         setShowBubble(true);
       }, 9000);
     };
@@ -109,7 +122,6 @@ export function RobotGuide() {
       mouseY.set(e.clientY);
       resetIdle();
     };
-
     const onOver = (e: MouseEvent) => {
       const el = (e.target as HTMLElement)?.closest?.('[data-guide]') as HTMLElement | null;
       if (el?.dataset.guide) {
@@ -122,27 +134,27 @@ export function RobotGuide() {
       if (el) setMessage(sectionMsg.current);
     };
 
-    window.addEventListener('mousemove', onMove, { passive: true });
-    document.addEventListener('mouseover', onOver);
-    document.addEventListener('mouseout', onOut);
+    if (resolved === 'cursor') {
+      window.addEventListener('mousemove', onMove, { passive: true });
+      document.addEventListener('mouseover', onOver);
+      document.addEventListener('mouseout', onOut);
+    }
 
-    // Section-aware guidance.
-    const sections = document.querySelectorAll<HTMLElement>('[data-guide-section]');
+    // Scrollspy: a section is "active" while it crosses the vertical centre
+    // of the viewport, regardless of how tall it is.
     const io = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((en) => en.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        const msg = visible?.target.getAttribute('data-guide-section');
-        if (msg) {
+        const active = entries.find((en) => en.isIntersecting);
+        const msg = active?.target.getAttribute('data-guide-section');
+        if (msg && msg !== sectionMsg.current) {
           sectionMsg.current = msg;
           setMessage(msg);
           setShowBubble(true);
         }
       },
-      { threshold: 0.5 },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
     );
-    sections.forEach((s) => io.observe(s));
+    document.querySelectorAll('[data-guide-section]').forEach((s) => io.observe(s));
 
     const introTimer = setTimeout(() => setWaving(false), 2600);
     resetIdle();
@@ -157,8 +169,59 @@ export function RobotGuide() {
     };
   }, [mouseX, mouseY]);
 
-  if (!enabled) return null;
+  if (mode === 'off') return null;
 
+  const bubble = (align: 'center' | 'right') => (
+    <AnimatePresence>
+      {showBubble && (
+        <motion.div
+          key={message}
+          initial={{ opacity: 0, y: 8, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+          className={
+            'glass text-foreground shadow-glow absolute bottom-[118%] w-[min(72vw,258px)] rounded-2xl px-3.5 py-2.5 text-[13px] leading-snug font-medium ' +
+            (align === 'center' ? 'left-1/2 -translate-x-1/2' : 'right-0')
+          }
+        >
+          {message}
+          <span
+            className={
+              'glass absolute -bottom-1 size-3 rotate-45 rounded-[3px] ' +
+              (align === 'center' ? 'left-1/2 -translate-x-1/2' : 'right-6')
+            }
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
+  // --- Mobile / touch: fixed floating mascot ---
+  if (mode === 'fixed') {
+    return (
+      <div className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61]">
+        <div className="relative">
+          {bubble('right')}
+          <button
+            type="button"
+            aria-label={showBubble ? 'Hide Flo the guide' : 'Ask Flo the guide'}
+            onClick={() => setShowBubble((v) => !v)}
+            className="block"
+          >
+            <motion.div
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Robot dx={still} dy={still} waving={waving} />
+            </motion.div>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // --- Desktop: cursor-following guide with trail ---
   return (
     <div aria-hidden className="pointer-events-none">
       {TRAIL.map((t, i) => (
@@ -173,24 +236,7 @@ export function RobotGuide() {
         transition={{ delay: 0.3, type: 'spring', stiffness: 200, damping: 15 }}
       >
         <div className="relative -translate-x-1/2 -translate-y-1/2">
-          {/* Speech bubble */}
-          <AnimatePresence>
-            {showBubble && (
-              <motion.div
-                key={message}
-                initial={{ opacity: 0, y: 8, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -6, scale: 0.9 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-                className="glass text-foreground absolute bottom-[115%] left-1/2 w-[min(74vw,232px)] -translate-x-1/2 rounded-2xl px-3.5 py-2.5 text-[13px] leading-snug font-medium shadow-glow"
-              >
-                {message}
-                <span className="glass absolute -bottom-1 left-1/2 size-3 -translate-x-1/2 rotate-45 rounded-[3px]" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Robot */}
+          {bubble('center')}
           <motion.div
             animate={{ y: [0, -5, 0] }}
             transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
@@ -213,9 +259,9 @@ function Robot({
   waving: boolean;
 }) {
   return (
-    <div className="relative size-14 drop-shadow-[0_8px_16px_rgba(109,77,255,0.35)]">
+    <div className="relative size-20 drop-shadow-[0_10px_20px_rgba(109,77,255,0.4)]">
       {/* Glow halo */}
-      <span className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle,var(--brand-violet),transparent_70%)] opacity-40 blur-md" />
+      <span className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle,var(--brand-violet),transparent_70%)] opacity-45 blur-lg" />
 
       <svg viewBox="0 0 64 64" className="size-full">
         <defs>
@@ -248,7 +294,7 @@ function Robot({
       {/* Waving hand on intro */}
       {waving && (
         <motion.span
-          className="absolute -right-1 top-7 text-sm"
+          className="absolute top-10 -right-1.5 text-lg"
           animate={{ rotate: [0, 18, -8, 18, 0] }}
           transition={{ duration: 1.1, repeat: 1 }}
         >
@@ -259,7 +305,7 @@ function Robot({
   );
 }
 
-/** A single eye; cx/cy are in percent of the 56px robot box. */
+/** A single eye; cx/cy are in percent of the robot box. */
 function Eye({
   cx,
   cy,
@@ -274,11 +320,17 @@ function Eye({
   return (
     <span
       className="absolute flex items-center justify-center rounded-full bg-white"
-      style={{ left: `${cx}%`, top: `${cy}%`, width: 9, height: 9, transform: 'translate(-50%,-50%)' }}
+      style={{
+        left: `${cx}%`,
+        top: `${cy}%`,
+        width: 13,
+        height: 13,
+        transform: 'translate(-50%,-50%)',
+      }}
     >
       <motion.span
         className="block rounded-full"
-        style={{ x: dx, y: dy, width: 4.5, height: 4.5, background: 'var(--brand-violet)' }}
+        style={{ x: dx, y: dy, width: 6.5, height: 6.5, background: 'var(--brand-violet)' }}
       >
         <motion.span
           className="block size-full rounded-full"
