@@ -32,6 +32,14 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Vibrant brand accents for gradients, glows and the robot guide. */
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-lime: var(--brand-lime);
+  --color-brand-amber: var(--brand-amber);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -42,36 +50,44 @@
 }
 
 /*
-  Flowint AI design system, v2 "Gen Z but grounded".
-  Warm cream base, ink text, fresh green brand, punchy coral CTA.
-  Light mode only for v1 (no .dark overrides on purpose).
+  Flowint AI design system, v3 "vibrant + minimal".
+  Cool near-white base, deep indigo ink, electric-violet brand,
+  hot-pink CTA, with cyan / lime / amber accents for energy.
+  Light mode only (no .dark overrides on purpose).
 */
 :root {
-  --background: #fbf9f3; /* warm cream */
-  --background-subtle: #f1ecdf; /* deeper cream for alternating sections */
-  --foreground: #1c1a15; /* warm ink */
+  --background: #fbfaff; /* cool near-white */
+  --background-subtle: #f1eefc; /* soft lilac for alternating sections */
+  --foreground: #120d2b; /* deep indigo ink */
   --card: #ffffff;
-  --card-foreground: #1c1a15;
+  --card-foreground: #120d2b;
   --popover: #ffffff;
-  --popover-foreground: #1c1a15;
-  --primary: #1f7a4d; /* grounded fresh green */
-  --primary-hover: #196340;
+  --popover-foreground: #120d2b;
+  --primary: #6d4dff; /* electric violet */
+  --primary-hover: #5a3be8;
   --primary-foreground: #ffffff;
-  --secondary: #f1ecdf;
-  --secondary-foreground: #1c1a15;
-  --muted: #f1ecdf;
-  --muted-foreground: #6d6555; /* warm gray */
-  --accent: #eae3d2;
-  --accent-foreground: #1c1a15;
-  --cta: #ff5c39; /* punchy coral */
-  --cta-hover: #e84a29;
+  --secondary: #eef0ff;
+  --secondary-foreground: #120d2b;
+  --muted: #f1eefc;
+  --muted-foreground: #5c5577; /* muted indigo-gray */
+  --accent: #e9e5ff;
+  --accent-foreground: #120d2b;
+  --cta: #ff3d81; /* hot magenta-pink */
+  --cta-hover: #ec2a6f;
   --cta-foreground: #ffffff;
-  --destructive: #d1402c;
-  --success: #1f7a4d;
-  --border: #e4dccb; /* warm border */
-  --input: #ddd3bf;
-  --ring: #1f7a4d;
+  --destructive: #e5484d;
+  --success: #12b886;
+  --border: #e7e2f7;
+  --input: #ddd6f3;
+  --ring: #6d4dff;
   --radius: 0.9rem;
+
+  /* Vibrant accent ramp */
+  --brand-violet: #6d4dff;
+  --brand-cyan: #00d3c7;
+  --brand-pink: #ff3d81;
+  --brand-lime: #b6f03c;
+  --brand-amber: #ffb020;
 }
 
 @layer base {
@@ -83,12 +99,17 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
   h1,
   h2,
   h3 {
     @apply font-display;
     letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--brand-violet);
+    color: #fff;
   }
 }
 
@@ -112,13 +133,62 @@
     border-radius: 0.1em;
   }
 
+  /* Vibrant gradient text, used on big headings. */
+  .text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--brand-violet) 0%,
+      var(--brand-pink) 45%,
+      var(--brand-amber) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-pan 6s ease-in-out infinite alternate;
+  }
+
   /* Tactile offset shadow: reads as a deliberate design choice, not a soft AI blur. */
   .shadow-pop {
-    box-shadow: 5px 5px 0 0 var(--foreground);
+    box-shadow: 6px 6px 0 0 var(--foreground);
+  }
+  /* Colored glow for vibrant hover states. */
+  .shadow-glow {
+    box-shadow:
+      0 10px 30px -8px color-mix(in oklab, var(--primary) 55%, transparent),
+      0 4px 12px -6px color-mix(in oklab, var(--cta) 45%, transparent);
+  }
+
+  /* Frosted-glass surface over the animated backdrop. */
+  .glass {
+    background: color-mix(in oklab, var(--card) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
+  }
+
+  /* Pill badge with a gradient hairline border. */
+  .chip-gradient {
+    position: relative;
+    isolation: isolate;
+  }
+  .chip-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(120deg, var(--brand-violet), var(--brand-cyan), var(--brand-pink));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
   }
 }
 
-/* Scrolling marquee strip. */
+/* ---------- Keyframes ---------- */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -127,11 +197,65 @@
     transform: translateX(-50%);
   }
 }
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes blob-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, -6%) scale(1.08);
+  }
+  66% {
+    transform: translate(-5%, 4%) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+.animate-blob {
+  animation: blob-drift 22s ease-in-out infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-float-slow,
+  .animate-blob,
+  .animate-spin-slow,
+  .text-gradient {
+    animation: none !important;
   }
 }

@@ -14,18 +14,18 @@ export default function OpengraphImage() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: 72,
-        background: '#fbf9f3',
-        color: '#1c1a15',
+        color: '#ffffff',
+        background: 'linear-gradient(125deg, #6d4dff 0%, #8b3bf0 42%, #ff3d81 100%)',
       }}
     >
-      <div style={{ display: 'flex', fontSize: 44, fontWeight: 800 }}>
-        Flowint<span style={{ color: '#1f7a4d' }}>.</span>
+      <div style={{ display: 'flex', fontSize: 46, fontWeight: 800 }}>
+        Flowint<span style={{ color: '#b6f03c' }}>.</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
+        <div style={{ fontSize: 80, fontWeight: 800, lineHeight: 1.03, letterSpacing: -2 }}>
           AI automation for small businesses
         </div>
-        <div style={{ marginTop: 28, fontSize: 32, color: '#6d6555' }}>
+        <div style={{ marginTop: 28, fontSize: 32, color: 'rgba(255,255,255,0.88)' }}>
           Inventory · GST invoicing · WhatsApp orders · AI data entry · Reports
         </div>
       </div>
@@ -33,15 +33,15 @@ export default function OpengraphImage() {
         style={{
           display: 'flex',
           alignSelf: 'flex-start',
-          background: '#ff5c39',
-          color: '#ffffff',
+          background: '#ffffff',
+          color: '#6d4dff',
           fontSize: 30,
           fontWeight: 700,
-          padding: '16px 32px',
+          padding: '16px 34px',
           borderRadius: 999,
         }}
       >
-        Book a free demo
+        Book a free demo →
       </div>
     </div>,
     size,

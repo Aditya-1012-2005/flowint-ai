@@ -3,6 +3,8 @@ import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/sonner';
+import { RobotGuide } from '@/components/experience/robot-guide';
+import { AnimatedBackdrop } from '@/components/experience/animated-backdrop';
 import { siteConfig, jsonLd } from '@/lib/utils/site';
 import { solutions } from '@/lib/utils/content';
 import './globals.css';
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#fbf9f3',
+  themeColor: '#6d4dff',
   width: 'device-width',
   initialScale: 1,
 };
@@ -99,6 +101,8 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html lang="en-IN" className={`${inter.variable} ${bricolage.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col overflow-x-clip">
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationJsonLd)} />
+        <AnimatedBackdrop />
+        <RobotGuide />
         <a
           href="#main"
           className="bg-foreground text-background sr-only z-[60] rounded-full px-4 py-2 text-sm font-semibold focus:not-sr-only focus:fixed focus:top-3 focus:left-3"

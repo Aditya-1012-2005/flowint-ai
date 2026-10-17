@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Clock, TriangleAlert, Repeat2, Check, Plus } from 'lucide-react';
+import { ArrowRight, Clock, TriangleAlert, Repeat2, Check, Plus, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layout/container';
 import { SolutionCard } from '@/components/features/solution-card';
 import { Eyebrow } from '@/components/layout/eyebrow';
+import { Reveal } from '@/components/experience/reveal';
+import { Magnetic } from '@/components/experience/magnetic';
 import { solutions, howItWorks, industries, faqs } from '@/lib/utils/content';
 import { jsonLd } from '@/lib/utils/site';
 
@@ -18,18 +20,21 @@ const problems = [
     title: 'Spreadsheets that break',
     description:
       'One wrong cell and the numbers stop adding up. Files get overwritten, and nobody is sure which version is right.',
+    tint: 'var(--brand-pink)',
   },
   {
     icon: Repeat2,
     title: 'The same manual work, again and again',
     description:
       'Copying figures from bills into Excel, every single day. It is slow, it is dull, and mistakes creep in.',
+    tint: 'var(--brand-violet)',
   },
   {
     icon: Clock,
     title: 'No time for the actual business',
     description:
       'Hours go into managing records instead of serving customers, buying smarter, or growing.',
+    tint: 'var(--brand-cyan)',
   },
 ];
 
@@ -61,7 +66,7 @@ const faqJsonLd = {
 };
 
 const ctaClass =
-  'bg-cta text-cta-foreground hover:bg-cta-hover h-12 w-full rounded-full px-7 text-base font-semibold sm:w-auto';
+  'bg-cta text-cta-foreground hover:bg-cta-hover shadow-glow h-12 w-full rounded-full px-7 text-base font-semibold sm:w-auto';
 
 export default function Home() {
   return (
@@ -69,14 +74,14 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqJsonLd)} />
 
       {/* Hero */}
-      <section>
+      <section data-guide-section="Welcome! This is what we do — help small businesses run on autopilot.">
         <Container className="py-12 sm:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
+            <Reveal stagger>
               <Eyebrow>AI automation for small &amp; local businesses</Eyebrow>
               <h1 className="text-foreground mt-6 text-4xl leading-[1.02] font-extrabold tracking-tight text-balance sm:text-6xl sm:leading-[0.98]">
-                Run your business on <span className="marker">autopilot</span>, not on Excel and
-                memory.
+                Run your business on <span className="text-gradient">autopilot</span>, not on Excel
+                and memory.
               </h1>
               <p className="text-muted-foreground mt-6 max-w-xl text-base leading-relaxed sm:text-lg">
                 Flowint AI brings simple, affordable AI automation to businesses still doing it all
@@ -84,21 +89,25 @@ export default function Home() {
                 themselves.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  render={<Link href="/contact" />}
-                  nativeButton={false}
-                  size="lg"
-                  className={ctaClass}
-                >
-                  Book a free demo
-                  <ArrowRight className="size-4" />
-                </Button>
+                <Magnetic className="w-full sm:w-auto">
+                  <Button
+                    render={<Link href="/contact" />}
+                    nativeButton={false}
+                    size="lg"
+                    data-guide="Click here to book a free demo — no card, no pressure."
+                    className={ctaClass}
+                  >
+                    Book a free demo
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Magnetic>
                 <Button
                   render={<Link href="/solutions" />}
                   nativeButton={false}
                   size="lg"
                   variant="outline"
-                  className="border-foreground/15 bg-card h-12 w-full rounded-full px-7 text-base font-semibold sm:w-auto"
+                  data-guide="See the full list of work we can automate for you."
+                  className="border-foreground/15 bg-card/70 h-12 w-full rounded-full px-7 text-base font-semibold backdrop-blur hover:border-primary/40 sm:w-auto"
                 >
                   See what we automate
                 </Button>
@@ -106,30 +115,31 @@ export default function Home() {
               <p className="text-muted-foreground mt-5 text-sm">
                 No card needed. No jargon. Just a real conversation.
               </p>
-            </div>
+            </Reveal>
 
-            {/* Concrete "what Flowint handled" card, tilted like a sticky note */}
+            {/* Concrete "what Flowint handled" card, floating glass sticky-note */}
             <div className="px-1 sm:px-0 lg:pl-6">
-              <div className="border-foreground bg-card shadow-pop rounded-3xl border-2 p-6 sm:rotate-2 sm:p-7">
+              <div className="animate-float-slow glass shadow-glow rounded-3xl p-6 sm:rotate-2 sm:p-7">
                 <div className="flex items-center justify-between">
-                  <p className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
+                  <p className="text-muted-foreground inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase">
+                    <Sparkles className="text-brand-violet size-3.5" aria-hidden />
                     This week, Flowint handled
                   </p>
-                  <span className="bg-primary size-2.5 rounded-full" aria-hidden />
+                  <span className="bg-brand-lime size-2.5 rounded-full" aria-hidden />
                 </div>
                 <ul className="mt-5 space-y-3">
                   {receiptRows.map((row) => (
                     <li key={row} className="text-foreground flex items-start gap-3 text-sm">
-                      <span className="bg-primary/10 text-primary mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full">
+                      <span className="from-brand-violet to-brand-pink mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
                         <Check className="size-3" />
                       </span>
                       <span className="font-medium">{row}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="border-border mt-5 flex items-center justify-between border-t pt-4">
+                <div className="border-border/60 mt-5 flex items-center justify-between border-t pt-4">
                   <span className="text-muted-foreground text-xs">Your time back</span>
-                  <span className="text-primary font-display text-lg font-extrabold">~9 hrs</span>
+                  <span className="text-gradient font-display text-lg font-extrabold">~9 hrs</span>
                 </div>
               </div>
             </div>
@@ -138,7 +148,10 @@ export default function Home() {
       </section>
 
       {/* Marquee strip */}
-      <section aria-hidden className="bg-foreground overflow-hidden py-4">
+      <section
+        aria-hidden
+        className="overflow-hidden border-y border-white/10 bg-foreground py-4"
+      >
         <div className="animate-marquee flex w-max">
           {[...marquee, ...marquee].map((item, i) => (
             <span
@@ -146,16 +159,16 @@ export default function Home() {
               className="text-background flex items-center gap-4 px-6 text-base font-semibold whitespace-nowrap sm:text-lg"
             >
               {item}
-              <span className="text-cta">✦</span>
+              <span className="text-brand-lime">✦</span>
             </span>
           ))}
         </div>
       </section>
 
       {/* The problem */}
-      <section>
+      <section data-guide-section="Sound familiar? These are the daily headaches we take away.">
         <Container className="py-16 sm:py-24">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Eyebrow>The hard way</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
               Manual work costs your business more than you think
@@ -163,11 +176,18 @@ export default function Home() {
             <p className="text-muted-foreground mt-4">
               If any of this sounds familiar, you are exactly who we build for.
             </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          </Reveal>
+          <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-3">
             {problems.map((problem) => (
-              <div key={problem.title} className="border-border bg-card rounded-3xl border-2 p-7">
-                <div className="bg-cta/10 text-cta flex size-12 items-center justify-center rounded-2xl">
+              <div
+                key={problem.title}
+                className="group bg-card/70 rounded-3xl border border-border/60 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow"
+                style={{ borderColor: undefined }}
+              >
+                <div
+                  className="flex size-12 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                  style={{ background: problem.tint }}
+                >
                   <problem.icon className="size-6" aria-hidden />
                 </div>
                 <h3 className="text-foreground mt-5 text-lg font-bold">{problem.title}</h3>
@@ -176,30 +196,33 @@ export default function Home() {
                 </p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* Solutions preview */}
-      <section className="bg-background-subtle border-border border-y">
+      <section
+        data-guide-section="Here's the work we automate. Hover a card to see the details."
+        className="border-border/60 border-y bg-background-subtle/60"
+      >
         <Container className="py-16 sm:py-24">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Eyebrow>What we automate</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
               Business process automation for the work you do every day
             </h2>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          </Reveal>
+          <Reveal stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {solutions.map((solution) => (
               <SolutionCard key={solution.title} solution={solution} />
             ))}
-          </div>
+          </Reveal>
           <div className="mt-10">
             <Button
               render={<Link href="/solutions" />}
               nativeButton={false}
               variant="outline"
-              className="border-foreground/15 bg-card rounded-full px-6 font-semibold"
+              className="border-foreground/15 bg-card/70 rounded-full px-6 font-semibold backdrop-blur hover:border-primary/40"
             >
               Explore all automation solutions
               <ArrowRight className="size-4" />
@@ -209,9 +232,9 @@ export default function Home() {
       </section>
 
       {/* Industries */}
-      <section>
+      <section data-guide-section="We build for businesses like yours, whatever the trade.">
         <Container className="py-16 sm:py-24">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Eyebrow>Who we work with</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
               Built for the businesses that keep India running
@@ -220,33 +243,36 @@ export default function Home() {
               If your day runs on Excel, registers and WhatsApp, automation can win you back hours
               every week.
             </p>
-          </div>
-          <ul className="mt-10 flex flex-wrap gap-3">
+          </Reveal>
+          <Reveal stagger className="mt-10 flex flex-wrap gap-3">
             {industries.map((industry) => (
-              <li
+              <span
                 key={industry}
-                className="border-border bg-card text-foreground rounded-full border-2 px-5 py-2.5 text-sm font-semibold"
+                className="chip-gradient bg-card/70 text-foreground rounded-full px-5 py-2.5 text-sm font-semibold backdrop-blur transition-transform hover:-translate-y-0.5"
               >
                 {industry}
-              </li>
+              </span>
             ))}
-          </ul>
+          </Reveal>
         </Container>
       </section>
 
       {/* How it works */}
-      <section className="bg-background-subtle border-border border-y">
+      <section
+        data-guide-section="Getting started is easy — three simple steps, nothing to relearn."
+        className="border-border/60 border-y bg-background-subtle/60"
+      >
         <Container className="py-16 sm:py-24">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <Eyebrow>How it works</Eyebrow>
             <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
               Simple to start. Nothing to relearn.
             </h2>
-          </div>
-          <ol className="mt-12 grid gap-10 md:grid-cols-3">
+          </Reveal>
+          <Reveal stagger as="ol" className="mt-12 grid gap-10 md:grid-cols-3">
             {howItWorks.map((item) => (
               <li key={item.step}>
-                <span className="font-display text-cta text-5xl font-extrabold sm:text-6xl">
+                <span className="text-gradient font-display text-5xl font-extrabold sm:text-6xl">
                   {String(item.step).padStart(2, '0')}
                 </span>
                 <h3 className="text-foreground mt-3 text-xl font-bold">{item.title}</h3>
@@ -255,24 +281,24 @@ export default function Home() {
                 </p>
               </li>
             ))}
-          </ol>
+          </Reveal>
         </Container>
       </section>
 
       {/* FAQ */}
-      <section>
+      <section data-guide-section="Questions? I've got answers right here.">
         <Container className="py-16 sm:py-24">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
+            <Reveal>
               <Eyebrow>FAQ</Eyebrow>
               <h2 className="text-foreground mt-5 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
                 Questions about AI automation, answered
               </h2>
-            </div>
-            <div className="divide-border border-border divide-y border-y">
+            </Reveal>
+            <Reveal stagger className="divide-border/60 border-border/60 divide-y border-y">
               {faqs.map((faq) => (
                 <details key={faq.question} className="group py-5">
-                  <summary className="text-foreground flex cursor-pointer list-none items-start justify-between gap-4 text-base font-bold sm:text-lg [&::-webkit-details-marker]:hidden">
+                  <summary className="text-foreground flex cursor-pointer list-none items-start justify-between gap-4 text-base font-bold transition-colors hover:text-primary sm:text-lg [&::-webkit-details-marker]:hidden">
                     {faq.question}
                     <Plus
                       className="text-primary mt-1 size-5 shrink-0 transition-transform group-open:rotate-45"
@@ -284,36 +310,50 @@ export default function Home() {
                   </p>
                 </details>
               ))}
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>
 
       {/* Final CTA */}
-      <section>
+      <section data-guide-section="Ready when you are — book a free demo and let's talk.">
         <Container className="pb-20 sm:pb-28">
-          <div className="bg-primary relative overflow-hidden rounded-[2rem] px-6 py-14 sm:px-14 sm:py-20">
+          <Reveal className="relative overflow-hidden rounded-[2rem] px-6 py-14 sm:px-14 sm:py-20">
+            <div
+              className="absolute inset-0 -z-10"
+              style={{
+                background:
+                  'linear-gradient(120deg, var(--brand-violet) 0%, var(--primary-hover) 40%, var(--brand-pink) 100%)',
+              }}
+            />
+            <span
+              aria-hidden
+              className="animate-blob absolute -top-20 -right-10 -z-10 size-72 rounded-full bg-white/15 blur-3xl"
+            />
             <div className="max-w-xl">
-              <h2 className="text-primary-foreground text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">
+              <h2 className="text-3xl font-extrabold tracking-tight text-balance text-white sm:text-4xl">
                 Ready to automate the paperwork?
               </h2>
-              <p className="text-primary-foreground/80 mt-4">
-                Tell us a little about your business and we will show you exactly what AI
-                automation can take off your plate, with a free, no-pressure demo.
+              <p className="mt-4 text-white/85">
+                Tell us a little about your business and we will show you exactly what AI automation
+                can take off your plate, with a free, no-pressure demo.
               </p>
               <div className="mt-8">
-                <Button
-                  render={<Link href="/contact" />}
-                  nativeButton={false}
-                  size="lg"
-                  className={ctaClass}
-                >
-                  Book your free demo
-                  <ArrowRight className="size-4" />
-                </Button>
+                <Magnetic className="inline-block">
+                  <Button
+                    render={<Link href="/contact" />}
+                    nativeButton={false}
+                    size="lg"
+                    data-guide="This is the one — book your free demo here!"
+                    className="h-12 w-full rounded-full bg-white px-7 text-base font-semibold text-primary shadow-glow hover:bg-white/90 sm:w-auto"
+                  >
+                    Book your free demo
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Magnetic>
               </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

@@ -4,6 +4,8 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layout/container';
 import { Eyebrow } from '@/components/layout/eyebrow';
+import { Reveal } from '@/components/experience/reveal';
+import { Magnetic } from '@/components/experience/magnetic';
 
 export const metadata: Metadata = {
   title: 'About Us: Affordable Business Automation',
@@ -34,24 +36,28 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-background-subtle border-border border-b">
+      <section
+        data-guide-section="A bit about us — and why we only build for small businesses."
+        className="border-border/60 border-b bg-background-subtle/60"
+      >
         <Container className="py-16 sm:py-20">
-          <div className="max-w-2xl">
+          <Reveal stagger className="max-w-2xl">
             <Eyebrow>About us</Eyebrow>
             <h1 className="text-foreground mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
-              Technology for businesses it usually skips
+              Technology for the businesses it{' '}
+              <span className="text-gradient">usually skips</span>
             </h1>
             <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
               Flowint AI exists to put real AI and workflow automation within reach of small and
               local businesses, not just the ones with an IT department.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       <section>
         <Container className="py-16 sm:py-24">
-          <div className="text-foreground/80 mx-auto max-w-3xl space-y-6 text-lg leading-relaxed">
+          <Reveal className="text-foreground/80 mx-auto max-w-3xl space-y-6 text-lg leading-relaxed">
             <p>
               Across markets and neighbourhoods, countless businesses still run on spreadsheets,
               paper registers, and the owner&apos;s memory. It works, until it does not. A stock
@@ -68,48 +74,56 @@ export default function AboutPage() {
               than sell them software they do not need. We start small, prove the value, and grow
               from there.
             </p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="bg-background-subtle border-border border-t">
+      <section
+        data-guide-section="What we believe — the principles behind every build."
+        className="border-border/60 border-t bg-background-subtle/60"
+      >
         <Container className="py-16 sm:py-24">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
               What we believe
             </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          </Reveal>
+          <Reveal stagger className="mt-12 grid gap-6 md:grid-cols-3">
             {values.map((value) => (
-              <div key={value.title} className="border-border bg-card rounded-3xl border p-7">
+              <div
+                key={value.title}
+                className="bg-card/70 rounded-3xl border border-border/60 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-glow"
+              >
                 <h3 className="text-foreground text-lg font-bold">{value.title}</h3>
                 <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                   {value.description}
                 </p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
-      <section>
+      <section data-guide-section="Let's see what we can do for your business.">
         <Container className="py-16 sm:py-20">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
               Let us see what we can do for your business
             </h2>
-            <div className="mt-8">
-              <Button
-                render={<Link href="/contact" />}
-                nativeButton={false}
-                size="lg"
-                className="bg-cta text-cta-foreground hover:bg-cta-hover h-12 rounded-full px-7 text-base font-semibold"
-              >
-                Get in touch
-                <ArrowRight className="size-4" />
-              </Button>
+            <div className="mt-8 flex justify-center">
+              <Magnetic className="inline-block">
+                <Button
+                  render={<Link href="/contact" />}
+                  nativeButton={false}
+                  size="lg"
+                  className="bg-cta text-cta-foreground hover:bg-cta-hover shadow-glow h-12 rounded-full px-7 text-base font-semibold"
+                >
+                  Get in touch
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Magnetic>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Clock, MessageCircle, MapPin, Phone, Mail } from 'lucide-react';
 import { Container } from '@/components/layout/container';
 import { ContactForm } from '@/components/features/contact-form';
+import { Reveal } from '@/components/experience/reveal';
 import { siteConfig } from '@/lib/utils/site';
 
 export const metadata: Metadata = {
@@ -32,12 +33,12 @@ const points = [
 
 export default function ContactPage() {
   return (
-    <section>
+    <section data-guide-section="Fill this in and we'll be in touch — I'll wait right here.">
       <Container className="py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <Reveal>
             <h1 className="text-foreground text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
-              Book your free automation demo
+              Book your free <span className="text-gradient">automation demo</span>
             </h1>
             <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
               Fill in a few details and we will get in touch to set up a time. Tell us what is
@@ -79,7 +80,7 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           <ContactForm />
         </div>

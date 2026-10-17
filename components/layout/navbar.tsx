@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Magnetic } from '@/components/experience/magnetic';
 import { siteConfig } from '@/lib/utils/site';
 import { cn } from 'cn';
 
@@ -21,7 +22,7 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="border-border bg-background/85 supports-backdrop-filter:bg-background/70 sticky top-0 z-50 border-b backdrop-blur-md">
+    <header className="border-border/60 bg-background/70 supports-backdrop-filter:bg-background/55 sticky top-0 z-50 border-b backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-8">
         <Link
           href="/"
@@ -29,7 +30,7 @@ export function Navbar() {
           onClick={() => setOpen(false)}
           aria-label="Flowint AI home"
         >
-          Flowint<span className="text-primary">.</span>
+          Flowint<span className="text-gradient">.</span>
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
@@ -50,13 +51,16 @@ export function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Button
-            render={<Link href="/contact" />}
-            nativeButton={false}
-            className="bg-cta text-cta-foreground hover:bg-cta-hover rounded-full px-5 font-semibold"
-          >
-            Book a demo
-          </Button>
+          <Magnetic>
+            <Button
+              render={<Link href="/contact" />}
+              nativeButton={false}
+              data-guide="Book a free demo any time from up here."
+              className="bg-cta text-cta-foreground hover:bg-cta-hover shadow-glow rounded-full px-5 font-semibold"
+            >
+              Book a demo
+            </Button>
+          </Magnetic>
         </div>
 
         <button
