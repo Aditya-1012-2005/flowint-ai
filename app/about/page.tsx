@@ -6,9 +6,11 @@ import { Container } from '@/components/layout/container';
 import { Eyebrow } from '@/components/layout/eyebrow';
 
 export const metadata: Metadata = {
-  title: 'About',
+  title: 'About Us: Affordable Business Automation',
   description:
-    'Flowint AI helps small vendors and local businesses adopt affordable automation, replacing manual, Excel-based work with tools that fit how they already operate.',
+    'Flowint AI is an AI automation company helping small vendors and local businesses in India replace manual, Excel-based work with affordable automation that fits how they already operate.',
+  alternates: { canonical: '/about' },
+  openGraph: { url: '/about' },
 };
 
 const values = [
@@ -40,8 +42,8 @@ export default function AboutPage() {
               Technology for businesses it usually skips
             </h1>
             <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
-              Flowint AI exists to put real automation within reach of small and local businesses,
-              not just the ones with an IT department.
+              Flowint AI exists to put real AI and workflow automation within reach of small and
+              local businesses, not just the ones with an IT department.
             </p>
           </div>
         </Container>

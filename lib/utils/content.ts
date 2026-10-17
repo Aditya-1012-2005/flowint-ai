@@ -1,4 +1,12 @@
-import { Boxes, ReceiptText, FileSpreadsheet, BarChart3, type LucideIcon } from 'lucide-react';
+import {
+  Boxes,
+  ReceiptText,
+  FileSpreadsheet,
+  BarChart3,
+  MessageCircle,
+  Workflow,
+  type LucideIcon,
+} from 'lucide-react';
 
 export type Solution = {
   icon: LucideIcon;
@@ -11,42 +19,65 @@ export type Solution = {
 export const solutions: Solution[] = [
   {
     icon: Boxes,
-    title: 'Inventory & stock tracking',
-    summary: "Know what's in stock without counting registers or updating a spreadsheet by hand.",
+    title: 'Inventory management automation',
+    summary:
+      "Know what's in stock in real time, without counting registers or updating a spreadsheet by hand.",
     details: [
       'Stock levels that update on their own as you buy and sell',
-      'Low-stock alerts before you run out of a fast-moving item',
-      'One clear view instead of five different Excel files',
+      'Smart low-stock alerts before a fast-moving item runs out',
+      'One live dashboard instead of five different Excel files',
     ],
   },
   {
     icon: ReceiptText,
-    title: 'Billing & invoicing',
-    summary: 'Make clean, correct invoices in seconds and keep track of who still owes you.',
+    title: 'GST billing & invoice automation',
+    summary: 'Generate clean, GST-ready invoices in seconds and always know who still owes you.',
     details: [
-      'GST-ready invoices without the manual formatting',
+      'GST-compliant invoices without the manual formatting',
       'Payment tracking so nothing slips through the cracks',
-      'Automatic reminders for pending payments',
+      'Automatic WhatsApp and email reminders for pending payments',
+    ],
+  },
+  {
+    icon: MessageCircle,
+    title: 'WhatsApp order automation',
+    summary:
+      'Turn the orders customers send on WhatsApp into a clean, trackable order list, automatically.',
+    details: [
+      'Orders captured from chats without copy-pasting',
+      'Order status and confirmations sent back to customers',
+      'Every order logged in one place, ready for billing',
     ],
   },
   {
     icon: FileSpreadsheet,
-    title: 'Data entry automation',
+    title: 'AI data entry & document processing',
     summary:
-      'Stop retyping the same numbers. Details from bills and orders flow in on their own.',
+      'Stop retyping the same numbers. AI reads bills, receipts and orders and fills your records for you.',
     details: [
-      'Pull details from bills, orders and messages automatically',
+      'AI extraction from bills, PDFs, photos and messages',
       'Fewer typos and mismatched entries',
       'Hours of manual typing saved every week',
     ],
   },
   {
+    icon: Workflow,
+    title: 'Workflow automation',
+    summary:
+      'Connect the tools you already use, like Excel, Google Sheets and WhatsApp, so routine tasks run themselves.',
+    details: [
+      'Repetitive steps handled automatically, end to end',
+      'Works with your current process, nothing new to learn',
+      'Grows with you as the business adds more work',
+    ],
+  },
+  {
     icon: BarChart3,
-    title: 'Reports & insights',
+    title: 'Automated reports & business insights',
     summary:
       'See how the business is really doing, day by day and month by month, without building charts.',
     details: [
-      'Ready-made sales and expense summaries',
+      'Ready-made sales, stock and expense summaries',
       'Spot your best products and slow days at a glance',
       'No spreadsheet formulas to maintain',
     ],
@@ -62,14 +93,53 @@ export const howItWorks = [
   },
   {
     step: '2',
-    title: 'We build automation around it',
+    title: 'We build AI automation around it',
     description:
-      "We set up simple tools that fit the way you already work, so there's nothing new to learn.",
+      "We set up simple automation that fits the way you already work, so there's nothing new to learn.",
   },
   {
     step: '3',
     title: 'You get your time back',
     description:
-      'The routine stuff runs on its own. You spend less time on data entry and more time on the business.',
+      'The routine stuff runs on its own. You spend less time on data entry and more time growing the business.',
+  },
+];
+
+/** Who we build for. Doubles as long-tail keyword coverage. */
+export const industries = [
+  'Retail & kirana stores',
+  'Wholesalers & distributors',
+  'Restaurants & cloud kitchens',
+  'Clinics & pharmacies',
+  'Manufacturers & workshops',
+  'Service businesses & agencies',
+];
+
+/** Rendered on the Home page and emitted as FAQPage JSON-LD. */
+export const faqs = [
+  {
+    question: 'What is AI automation for a small business?',
+    answer:
+      'It means letting software handle the repetitive work you do every day, like updating stock, making invoices, typing in bill details or logging WhatsApp orders. Flowint AI sets this up around your existing process, so the work happens on its own without you learning a complicated new system.',
+  },
+  {
+    question: 'Do I need to stop using Excel or WhatsApp?',
+    answer:
+      'No. We start from the tools you already use, including Excel, Google Sheets, paper registers and WhatsApp, and automate around them. You keep working the way you are comfortable with.',
+  },
+  {
+    question: 'How much does business automation cost?',
+    answer:
+      'Our automation is priced for small and local businesses, not large companies. The cost depends on what you want automated, so we start with a free demo, find the quickest wins, and give you a clear quote before anything is built.',
+  },
+  {
+    question: 'How long does it take to get started?',
+    answer:
+      'Most businesses see their first automation running within a few weeks. We begin with the task that wastes the most time, prove the value, and grow from there.',
+  },
+  {
+    question: 'Is my business data safe?',
+    answer:
+      'Yes. Your data stays yours. We only access what is needed to run your automation and we never sell or share it.',
   },
 ];

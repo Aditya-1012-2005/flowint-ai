@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/lib/utils/site';
@@ -12,6 +12,14 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  // Close the mobile menu with Escape.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
   return (
     <header className="border-border bg-background/85 supports-backdrop-filter:bg-background/70 sticky top-0 z-50 border-b backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-8">
@@ -19,11 +27,12 @@ export function Navbar() {
           href="/"
           className="text-foreground font-display text-xl font-extrabold tracking-tight"
           onClick={() => setOpen(false)}
+          aria-label="Flowint AI home"
         >
           Flowint<span className="text-primary">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
@@ -54,6 +63,7 @@ export function Navbar() {
           type="button"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-nav"
           className="text-foreground border-border inline-flex size-10 items-center justify-center rounded-full border md:hidden"
           onClick={() => setOpen((v) => !v)}
         >
@@ -62,7 +72,11 @@ export function Navbar() {
       </div>
 
       {open && (
-        <nav className="border-border bg-background border-t px-4 py-4 md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label="Mobile"
+          className="border-border bg-background border-t px-4 py-4 md:hidden"
+        >
           <ul className="flex flex-col gap-1">
             {siteConfig.nav.map((item) => (
               <li key={item.href}>

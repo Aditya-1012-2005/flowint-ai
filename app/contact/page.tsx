@@ -5,9 +5,11 @@ import { ContactForm } from '@/components/features/contact-form';
 import { siteConfig } from '@/lib/utils/site';
 
 export const metadata: Metadata = {
-  title: 'Book a Demo',
+  title: 'Book a Free AI Automation Demo',
   description:
-    'Tell Flowint AI about your business and book a free, no-pressure demo to see what we can automate for you.',
+    'Book a free, no-pressure demo with Flowint AI. Tell us about your business and see how AI automation can handle your inventory, invoicing, WhatsApp orders and data entry.',
+  alternates: { canonical: '/contact' },
+  openGraph: { url: '/contact' },
 };
 
 const points = [
@@ -35,7 +37,7 @@ export default function ContactPage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h1 className="text-foreground text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">
-              Book your free demo
+              Book your free automation demo
             </h1>
             <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
               Fill in a few details and we will get in touch to set up a time. Tell us what is
