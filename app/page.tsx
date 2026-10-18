@@ -7,7 +7,7 @@ import { SolutionCard } from '@/components/features/solution-card';
 import { Eyebrow } from '@/components/layout/eyebrow';
 import { Reveal } from '@/components/experience/reveal';
 import { Magnetic } from '@/components/experience/magnetic';
-import { solutions, howItWorks, industries, faqs } from '@/lib/utils/content';
+import { featuredSolutions, howItWorks, industries, faqs } from '@/lib/utils/content';
 import { jsonLd } from '@/lib/utils/site';
 
 export const metadata: Metadata = {
@@ -214,7 +214,7 @@ export default function Home() {
             </h2>
           </Reveal>
           <Reveal stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {solutions.map((solution) => (
+            {featuredSolutions.map((solution) => (
               <SolutionCard key={solution.title} solution={solution} />
             ))}
           </Reveal>

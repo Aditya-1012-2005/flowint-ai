@@ -26,7 +26,7 @@ export default function OpengraphImage() {
           AI automation for small businesses
         </div>
         <div style={{ marginTop: 28, fontSize: 32, color: 'rgba(255,255,255,0.88)' }}>
-          Inventory · GST invoicing · WhatsApp orders · AI data entry · Reports
+          AI agents · Live dashboards · Google Sheets · GST invoicing · Data analysis
         </div>
       </div>
       <div

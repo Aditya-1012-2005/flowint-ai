@@ -1,8 +1,11 @@
 import {
+  Bot,
+  LayoutDashboard,
+  BrainCircuit,
+  Table2,
   Boxes,
   ReceiptText,
   FileSpreadsheet,
-  BarChart3,
   MessageCircle,
   Workflow,
   type LucideIcon,
@@ -17,6 +20,50 @@ export type Solution = {
 
 /** Shared by the Home preview and the full Solutions page. */
 export const solutions: Solution[] = [
+  {
+    icon: Bot,
+    title: 'AI agents & smart tools',
+    summary:
+      'Put AI agents and custom tools to work on the repetitive jobs — they do your busywork so you and your team do not have to.',
+    details: [
+      'AI agents that run tasks end to end, on their own',
+      'Custom tools built around your exact workflow',
+      'You stay in control; they do the heavy lifting',
+    ],
+  },
+  {
+    icon: LayoutDashboard,
+    title: 'Live interactive dashboards',
+    summary:
+      'Creative, interactive dashboards that show your whole business live — sales, stock and cash, all updating in real time.',
+    details: [
+      'Real-time numbers, no manual refreshing',
+      'Filter and drill into any metric in a click',
+      'One beautiful screen instead of ten spreadsheets',
+    ],
+  },
+  {
+    icon: BrainCircuit,
+    title: 'AI data analysis & insights',
+    summary:
+      'AI digs through your data and surfaces insights and patterns no human could spot — so you decide with facts, not guesswork.',
+    details: [
+      'Spots trends, spikes and anomalies automatically',
+      'Finds hidden patterns across all your data',
+      'Clear, plain-language insights you can act on',
+    ],
+  },
+  {
+    icon: Table2,
+    title: 'Google Sheets automation',
+    summary:
+      'Automate the Google Sheets work you do by hand and save a lot of hours every week — with nothing new to learn.',
+    details: [
+      'Sheets that update, sort and calculate themselves',
+      'Data flows in from bills, forms and other tools',
+      'Hours of manual copy-paste gone for good',
+    ],
+  },
   {
     icon: Boxes,
     title: 'Inventory management automation',
@@ -71,18 +118,10 @@ export const solutions: Solution[] = [
       'Grows with you as the business adds more work',
     ],
   },
-  {
-    icon: BarChart3,
-    title: 'Automated reports & business insights',
-    summary:
-      'See how the business is really doing, day by day and month by month, without building charts.',
-    details: [
-      'Ready-made sales, stock and expense summaries',
-      'Spot your best products and slow days at a glance',
-      'No spreadsheet formulas to maintain',
-    ],
-  },
 ];
+
+/** Featured on the Home page (the rest live on the Solutions page). */
+export const featuredSolutions = solutions.slice(0, 6);
 
 export const howItWorks = [
   {
@@ -95,7 +134,7 @@ export const howItWorks = [
     step: '2',
     title: 'We build AI automation around it',
     description:
-      "We set up simple automation that fits the way you already work, so there's nothing new to learn.",
+      "We set up agents, tools and dashboards that fit the way you already work, so there's nothing new to learn.",
   },
   {
     step: '3',
@@ -118,12 +157,17 @@ export const industries = [
 /** Rendered on the Home page and emitted as FAQPage JSON-LD. */
 export const faqs = [
   {
+    question: 'Can AI agents and tools really do the work for me?',
+    answer:
+      'Yes. We set up AI agents and custom tools that handle repetitive jobs end to end — updating sheets, preparing invoices, sorting data and more — and flag anything that needs your decision. You stay in control; they do the busywork.',
+  },
+  {
     question: 'What is AI automation for a small business?',
     answer:
       'It means letting software handle the repetitive work you do every day, like updating stock, making invoices, typing in bill details or logging WhatsApp orders. Flowint AI sets this up around your existing process, so the work happens on its own without you learning a complicated new system.',
   },
   {
-    question: 'Do I need to stop using Excel or WhatsApp?',
+    question: 'Do I need to stop using Excel, Google Sheets or WhatsApp?',
     answer:
       'No. We start from the tools you already use, including Excel, Google Sheets, paper registers and WhatsApp, and automate around them. You keep working the way you are comfortable with.',
   },
