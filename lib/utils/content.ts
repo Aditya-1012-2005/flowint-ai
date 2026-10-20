@@ -8,6 +8,12 @@ import {
   FileSpreadsheet,
   MessageCircle,
   Workflow,
+  Store,
+  Truck,
+  UtensilsCrossed,
+  Stethoscope,
+  Factory,
+  Briefcase,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -144,14 +150,52 @@ export const howItWorks = [
   },
 ];
 
+export type Industry = {
+  icon: LucideIcon;
+  name: string;
+  /** The everyday win this trade gets — concrete, in their own words. */
+  outcome: string;
+  tint: string;
+};
+
 /** Who we build for. Doubles as long-tail keyword coverage. */
-export const industries = [
-  'Retail & kirana stores',
-  'Wholesalers & distributors',
-  'Restaurants & cloud kitchens',
-  'Clinics & pharmacies',
-  'Manufacturers & workshops',
-  'Service businesses & agencies',
+export const industries: Industry[] = [
+  {
+    icon: Store,
+    name: 'Retail & kirana stores',
+    outcome: 'Live stock counts and GST bills, straight from the day’s sales.',
+    tint: 'var(--brand-violet)',
+  },
+  {
+    icon: Truck,
+    name: 'Wholesalers & distributors',
+    outcome: 'Order lists and pending payments that keep themselves current.',
+    tint: 'var(--brand-cyan)',
+  },
+  {
+    icon: UtensilsCrossed,
+    name: 'Restaurants & cloud kitchens',
+    outcome: 'Every WhatsApp and app order logged in one place, ready to bill.',
+    tint: 'var(--brand-pink)',
+  },
+  {
+    icon: Stethoscope,
+    name: 'Clinics & pharmacies',
+    outcome: 'Stock, expiry and billing handled without the paper registers.',
+    tint: 'var(--brand-amber)',
+  },
+  {
+    icon: Factory,
+    name: 'Manufacturers & workshops',
+    outcome: 'Jobs, materials and invoices tracked end to end, not in your head.',
+    tint: 'var(--brand-violet)',
+  },
+  {
+    icon: Briefcase,
+    name: 'Service businesses & agencies',
+    outcome: 'Client work, follow-ups and billing running quietly on their own.',
+    tint: 'var(--brand-cyan)',
+  },
 ];
 
 /** Rendered on the Home page and emitted as FAQPage JSON-LD. */
