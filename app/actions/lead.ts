@@ -2,6 +2,7 @@
 
 import { leadSchema, type LeadInput, type LeadFormState } from '@/lib/validations/lead';
 import { createLead } from '@/services/lead.service';
+import { notifyNewLead } from '@/services/notification.service';
 
 export async function submitLead(input: LeadInput): Promise<LeadFormState> {
   const parsed = leadSchema.safeParse(input);
@@ -30,7 +31,6 @@ export async function submitLead(input: LeadInput): Promise<LeadFormState> {
 
   try {
     await createLead({ name, businessName, phone, email, message });
-    return { success: true, message: "Thanks! We'll be in touch soon." };
   } catch (error) {
     console.error('submitLead failed:', error);
     return {
@@ -38,4 +38,12 @@ export async function submitLead(input: LeadInput): Promise<LeadFormState> {
       message: 'Something went wrong on our end. Please try again in a moment.',
     };
   }
+
+  // Lead is safely stored. Alerting the team is best-effort — a failed
+  // email/WhatsApp send must never turn a captured lead into an error.
+  await notifyNewLead({ name, businessName, phone, email, message }).catch((error) => {
+    console.error('lead notification failed:', error);
+  });
+
+  return { success: true, message: "Thanks! We'll be in touch soon." };
 }
