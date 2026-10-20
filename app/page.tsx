@@ -252,14 +252,23 @@ export default function Home() {
               every week.
             </p>
           </Reveal>
-          <Reveal stagger className="mt-10 flex flex-wrap gap-3">
+          <Reveal stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry) => (
-              <span
-                key={industry}
-                className="chip-gradient bg-card/70 text-foreground rounded-full px-5 py-2.5 text-sm font-semibold backdrop-blur transition-transform hover:-translate-y-0.5"
+              <div
+                key={industry.name}
+                className="group bg-card/70 hover:border-primary/40 hover:shadow-glow rounded-3xl border border-border/60 p-6 backdrop-blur transition-all hover:-translate-y-1.5"
               >
-                {industry}
-              </span>
+                <div
+                  className="flex size-11 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:scale-105"
+                  style={{ background: industry.tint }}
+                >
+                  <industry.icon className="size-5" aria-hidden />
+                </div>
+                <h3 className="text-foreground mt-4 font-bold">{industry.name}</h3>
+                <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
+                  {industry.outcome}
+                </p>
+              </div>
             ))}
           </Reveal>
         </Container>
