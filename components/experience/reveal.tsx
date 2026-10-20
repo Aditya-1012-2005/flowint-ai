@@ -39,16 +39,31 @@ export function Reveal({
       const el = ref.current;
       if (!el) return;
 
-      const targets = stagger ? Array.from(el.children) : el;
-      gsap.from(targets, {
-        opacity: 0,
-        y,
-        duration: 0.8,
-        delay,
-        ease: 'expo.out',
-        stagger: stagger ? 0.08 : 0,
-        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-      });
+      const targets = stagger ? Array.from(el.children) : (el as Element);
+      const reveal = () =>
+        gsap.to(targets, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay,
+          ease: 'expo.out',
+          stagger: stagger ? 0.08 : 0,
+          overwrite: 'auto',
+        });
+
+      // Hide first, then decide how to reveal. Using an explicit set + `to`
+      // (instead of `from`) so content can never get stuck invisible.
+      gsap.set(targets, { opacity: 0, y });
+
+      // Already in or above the viewport on mount — a deep link, a refresh
+      // mid-page, or a restored scroll position. Reveal immediately so a
+      // section is never left blank waiting for a scroll that already happened.
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
+        reveal();
+        return;
+      }
+
+      ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: reveal });
     },
     { scope: ref },
   );

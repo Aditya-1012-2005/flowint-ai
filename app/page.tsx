@@ -112,9 +112,16 @@ export default function Home() {
                   See what we automate
                 </Button>
               </div>
-              <p className="text-muted-foreground mt-5 text-sm">
-                No card needed. No jargon. Just a real conversation.
-              </p>
+              <ul className="text-muted-foreground mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+                {['No card required', 'No code to learn', 'Built around WhatsApp & Excel'].map(
+                  (point) => (
+                    <li key={point} className="flex items-center gap-1.5">
+                      <Check className="text-success size-4 shrink-0" aria-hidden />
+                      {point}
+                    </li>
+                  ),
+                )}
+              </ul>
             </Reveal>
 
             {/* Concrete "what Flowint handled" card, floating glass sticky-note */}
