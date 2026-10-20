@@ -43,10 +43,10 @@ export function Reveal({
       gsap.from(targets, {
         opacity: 0,
         y,
-        duration: 0.7,
+        duration: 0.8,
         delay,
-        ease: 'power3.out',
-        stagger: stagger ? 0.09 : 0,
+        ease: 'expo.out',
+        stagger: stagger ? 0.08 : 0,
         scrollTrigger: { trigger: el, start: 'top 85%', once: true },
       });
     },

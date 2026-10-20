@@ -18,7 +18,7 @@ export function SolutionCard({
         className="pointer-events-none absolute -top-16 -right-16 size-40 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-60"
         style={{ background: 'radial-gradient(circle, var(--brand-violet), transparent 70%)' }}
       />
-      <div className="from-brand-violet to-brand-pink flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-glow transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+      <div className="from-brand-violet to-brand-pink flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-glow transition-transform duration-300 group-hover:scale-105">
         <Icon className="size-7" aria-hidden />
       </div>
       <h3 className="text-foreground mt-5 text-xl font-bold">{title}</h3>

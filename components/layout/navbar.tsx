@@ -34,20 +34,29 @@ export function Navbar() {
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
-          {siteConfig.nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'rounded-full px-3.5 py-2 text-sm font-medium transition-colors',
-                pathname === item.href
-                  ? 'bg-accent text-foreground'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {siteConfig.nav.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                  'group/nav relative rounded-full px-3.5 py-2 text-sm font-medium transition-colors',
+                  active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
+                )}
+              >
+                {item.label}
+                <span
+                  aria-hidden
+                  className={cn(
+                    'from-brand-violet to-brand-pink absolute inset-x-3.5 -bottom-0 h-0.5 origin-center rounded-full bg-gradient-to-r transition-transform duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)]',
+                    active ? 'scale-x-100' : 'scale-x-0 group-hover/nav:scale-x-100',
+                  )}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden md:block">

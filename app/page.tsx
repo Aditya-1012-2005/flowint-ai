@@ -182,11 +182,10 @@ export default function Home() {
             {problems.map((problem) => (
               <div
                 key={problem.title}
-                className="group bg-card/70 rounded-3xl border border-border/60 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow"
-                style={{ borderColor: undefined }}
+                className="group bg-card/70 hover:border-primary/40 rounded-3xl border border-border/60 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1.5 hover:shadow-glow"
               >
                 <div
-                  className="flex size-12 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+                  className="flex size-12 items-center justify-center rounded-2xl text-white transition-transform duration-300 group-hover:scale-105"
                   style={{ background: problem.tint }}
                 >
                   <problem.icon className="size-6" aria-hidden />

@@ -107,7 +107,11 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${bricolage.variable} h-full antialiased`}>
+    <html
+      lang="en-IN"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${bricolage.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col overflow-x-clip">
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationJsonLd)} />
         <AnimatedBackdrop />
