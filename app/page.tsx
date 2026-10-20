@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Clock, TriangleAlert, Repeat2, Check, Plus, Sparkles } from 'lucide-react';
+import { ArrowRight, Clock, TriangleAlert, Repeat2, Check, Plus, Sparkles, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/layout/container';
 import { SolutionCard } from '@/components/features/solution-card';
@@ -46,6 +46,15 @@ const marquee = [
   'one source of truth',
   'fewer costly mistakes',
   'your evenings back',
+];
+
+// The hero card tells a before -> after story: the same week, done by hand
+// vs. on autopilot. Rows are deliberately parallel so the contrast lands.
+const beforeRows = [
+  'Counting stock off the register',
+  'Typing invoices into Excel',
+  'Copying WhatsApp orders by hand',
+  'Hunting for who hasn’t paid',
 ];
 
 const receiptRows = [
@@ -124,30 +133,63 @@ export default function Home() {
               </ul>
             </Reveal>
 
-            {/* Concrete "what Flowint handled" card, floating glass sticky-note */}
+            {/* Hero signature: the same week by hand vs. on autopilot. */}
             <div className="px-1 sm:px-0 lg:pl-6">
               <div className="animate-float-slow glass shadow-glow rounded-3xl p-6 sm:rotate-2 sm:p-7">
+                {/* Before — the manual way */}
                 <div className="flex items-center justify-between">
                   <p className="text-muted-foreground inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase">
-                    <Sparkles className="text-brand-violet size-3.5" aria-hidden />
-                    This week, Flowint handled
+                    <span className="bg-brand-pink size-2 rounded-full" aria-hidden />
+                    By hand, this week
                   </p>
-                  <span className="bg-brand-lime size-2.5 rounded-full" aria-hidden />
+                  <span className="text-brand-pink inline-flex items-center gap-1 text-xs font-semibold">
+                    <Clock className="size-3.5" aria-hidden />
+                    ~9 hrs lost
+                  </span>
                 </div>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-4 space-y-2.5">
+                  {beforeRows.map((row) => (
+                    <li
+                      key={row}
+                      className="text-muted-foreground flex items-center gap-2.5 text-sm"
+                    >
+                      <X className="text-brand-pink/70 size-4 shrink-0" aria-hidden />
+                      <span className="decoration-brand-pink/40 line-through">{row}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Pivot */}
+                <div className="my-5 flex items-center gap-3">
+                  <span className="bg-border h-px flex-1" aria-hidden />
+                  <span className="from-brand-violet to-brand-pink inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r px-3 py-1 text-xs font-bold text-white">
+                    <Sparkles className="size-3.5" aria-hidden />
+                    With Flowint
+                  </span>
+                  <span className="bg-border h-px flex-1" aria-hidden />
+                </div>
+
+                {/* After — on autopilot */}
+                <div className="flex items-center justify-between">
+                  <p className="text-foreground inline-flex items-center gap-1.5 text-xs font-bold tracking-wide uppercase">
+                    <span className="bg-brand-lime size-2 rounded-full" aria-hidden />
+                    On autopilot
+                  </p>
+                  <span className="text-success inline-flex items-center gap-1 text-xs font-semibold">
+                    <Check className="size-3.5" aria-hidden />
+                    ~9 hrs back
+                  </span>
+                </div>
+                <ul className="mt-4 space-y-2.5">
                   {receiptRows.map((row) => (
-                    <li key={row} className="text-foreground flex items-start gap-3 text-sm">
-                      <span className="from-brand-violet to-brand-pink mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
+                    <li key={row} className="text-foreground flex items-center gap-2.5 text-sm">
+                      <span className="from-brand-violet to-brand-pink flex size-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-white">
                         <Check className="size-3" />
                       </span>
                       <span className="font-medium">{row}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="border-border/60 mt-5 flex items-center justify-between border-t pt-4">
-                  <span className="text-muted-foreground text-xs">Your time back</span>
-                  <span className="text-gradient font-display text-lg font-extrabold">~9 hrs</span>
-                </div>
               </div>
             </div>
           </div>
